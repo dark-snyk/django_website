@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+</head>
+<body>
+{% for user_cart in cart %}
+    {{ user_cart.user_product }}<br>
+    {{ user_cart.user_product_quantity }}<br>
+    {{ user_cart.total_for_product }}<br>
+{% endfor %}
+
+<!-- action передает обязаности для другой сылки-->
+<form action="/order" method="POST">
+    {% csrf_token %}
+    <button onclick="function()"> ORDER </button>
+</form>
+
+
+<script>
+    function confirm(){
+        alert('Submit order')
+    }
+</script>
+</body>
+</html>

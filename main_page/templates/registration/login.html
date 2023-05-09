@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>registration page</title>
+</head>
+<body>
+    <form method="POST" >
+        {% csrf_token %}
+        {{ form.as_p }}
+        <!--in name field we point out to backend function-->
+        <button>Login</button>
+    </form>
+    <br>
+</body>
+</html>

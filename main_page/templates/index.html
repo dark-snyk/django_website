@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+</head>
+<body>
+  <h1>Online mall</h1>
+    <!--search functional works with forms.py-->
+    <form method="POST" >
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button>Search</button>
+    </form>
+  <hr>
+      <!--authentication user-->
+     {% if user.is_authenticated %}
+        <a href='accounts/logout'>LOGOUT</a>
+        <a href='cart'>Cart</a>
+    {% else %}
+        <a href='accounts/login'>LOGIN</a>
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <!--adding backend functional to front in our case 'for' circle(syntax jinja2)-->
+    {% for category in all_categories %}
+    <!--creating link for redirect to next page-->
+    <h2><a href="/category/{{ category.id }}">{{ category.category_name }}</a></h2>
+    {% endfor  %}
+
+    <!--output of all products-->
+    {% for i in products %}
+        <a href="/item/{{ i.id }}">{{ i.product_name }}</a>
+    {% endfor %}
+</body>
+</html>
