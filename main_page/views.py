@@ -45,10 +45,11 @@ def exact_product(request, pk):
 def get_exact_category(request, pk):
     # get single object from db by id
     exact_category = models.Category.objects.get(id=pk)
+    categories = models.Category.objects.all()
     #  using filter picking all product data by filter
     category_products = models.Product.objects.filter(product_category=exact_category)
 
-    return render(request, 'exact_category.html', {'category_products':category_products})
+    return render(request, 'categrory_products.html', {'category_products':category_products, 'categories':categories})
 
 
 def get_exact_product(request, pk):
@@ -61,11 +62,12 @@ def get_exact_product(request, pk):
             total_for_product=product.product_price*int(request.POST.get('user_product_quantity')))
         return redirect('/cart')
 
-    return render(request, 'exact_product.html', context)
+    return render(request, 'about_product.html', context)
 
 def get_user_cart(request):
     user_cart = models.Cart.objects.filter(user_id=request.user.id)
-    context = {'cart':user_cart}
+    total = sum([i.total_for_product for i in user_cart])
+    context = {'cart':user_cart, 'total': total}
     return render(request, 'user_cart.html', context)
 
 # submit order
@@ -79,7 +81,7 @@ def complete_order(request):
     for cart in user_cart:
         result_message += f'<b>{cart.user_product}</b> x {cart.user_product_quantity} = {cart.total_for_product} sum\n'
 
-        total_for_all_cart += total_for_all_cart
+        total_for_all_cart += cart.total_for_product
 
     result_message += f"\n-------------\n<b>total: {total_for_all_cart} sum</b>"
     # message for admin to telegram

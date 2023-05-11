@@ -48,7 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware' # open only for server ,style git reset venv(reset virtual env because on github will it's own)
+     'whitenoise.middleware.WhiteNoiseMiddleware' # open only for server ,style git reset venv(reset virtual env because on github will it's own)
 ]
 
 ROOT_URLCONF = 'online_shop.urls'
